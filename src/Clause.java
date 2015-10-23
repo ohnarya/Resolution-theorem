@@ -1,5 +1,11 @@
+/*
+ * Author : Jiyoung Hwang
+ * Name   : Clause.java
+ * Date   : 10/22/2015
+ * Description : parsing a CNF clause into propositions and check if 2 clauses are resolvable
+ * 
+ * */
 import java.util.HashMap;
-
 
 
 public class Clause{

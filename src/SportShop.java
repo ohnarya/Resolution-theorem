@@ -1,3 +1,14 @@
+/*
+ * Author : Jiyoung Hwang
+ * Date   : 10/22/2015
+ * Description : prove propositional theorem using resolution refutation
+ *               1) make a CNF form for each clause
+ *               2) add negated desired query(-q)
+ *               3) resolve until meeting empty clause or no more resolvable clauses
+ *               4) if empty clause exits : success, otherwise : fail
+ * 
+ * */
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;

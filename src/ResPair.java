@@ -1,4 +1,10 @@
-
+/*
+ * Author : Jiyoung Hwang
+ * Name   : ResPair.java
+ * Date   : 10/22/2015
+ * Description : having 2 resolvable clauses with heuristic function having smallest sum of the length of 2 clauses
+ * 
+ * */
 public class ResPair implements Comparable<ResPair>{
 	int i;
 	int j;
