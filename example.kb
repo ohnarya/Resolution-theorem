@@ -1,6 +1,6 @@
-  #P^Q->RvS converted to CNF
+#P^Q->RvS converted to CNF
 -P -Q R S
--A -R
+-A -R  
 A
 P
 Q

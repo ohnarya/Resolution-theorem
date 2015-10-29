@@ -18,19 +18,29 @@ public class ResPair implements Comparable<ResPair>{
 	}
 	
 	ResPair(int i, int j, Clause ic, Clause jc){
-		this.i = i;
-		this.j = j;
-		this.ic = ic;
-		this.jc = jc;
+		this.i    = i;
+		this.j    = j;
+		this.ic   = ic;
+		this.jc   = jc;
 		this.heur = setHeur();
 		
 	}
+	/*
+	 * set heuristic of 2 clauses sizes to give a priority to be chosen 
+	 * */
 	public int setHeur(){
 		return ic.getSize() + jc.getSize();
 	}
+	/*
+	 * override toString
+	 * */
 	public String toString(){
 		return "("+i+":"+ ic +","+j+":"+ jc+")\n";
 	}
+	/*
+	 * print resolving clauses
+	 * 
+	 * */
 	public void print(){
 		System.out.format("[%d:%s][%d:%s]\n",i,ic, j,jc);
 	}
@@ -41,6 +51,7 @@ public class ResPair implements Comparable<ResPair>{
 		
 		return this.heur - rp.heur;
 	}
+	
 	public boolean equals(Object o){
 		if(o instanceof ResPair){
 			if(this.i == ((ResPair)o).i && 

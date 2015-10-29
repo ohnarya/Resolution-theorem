@@ -1,5 +1,6 @@
 /*
  * Author : Jiyoung Hwang
+ * Name   : SportShop.java
  * Date   : 10/22/2015
  * Description : prove propositional theorem using resolution refutation
  *               1) make a CNF form for each clause
@@ -45,25 +46,25 @@ public class SportShop {
 
 		/*check resolvable with initial KB*/
 		checkResolution();
-	
+
 		/*util not resolvable */
 		while(!candidates.isEmpty()){
+			System.out.format("iteration=%d, queue size=%d ",iter,candidates.size());
+			
 			/*pick one */
 			ResPair rp = candidates.poll();
-			
+			System.out.format(", resolution on %d and %d\n",rp.i,rp.j);
 			/*resolve one at a time*/
-			ArrayList<Clause> resolvent = resolve(rp);
+			Clause c = resolve(rp);
 					
-			for(Clause c: resolvent){
-				System.out.format("iteration=%d, queue size=%d, resolution on %d and %d\n",iter,candidates.size(),rp.i,rp.j);
+//			for(Clause c: resolvent){
 				System.out.format("resolving (%s) and (%s)\n", rp.ic, rp.jc);
 				System.out.format("%d: %s generated\n",iter,c.clause==null?"Empty clause":c);
-				
 				/*make a relation*/
 				c.left  = rp.ic;
 				c.right = rp.jc;
-				c.l = ""+rp.i;
-				c.r = ""+rp.j;
+				c.l     = ""+rp.i;
+				c.r     = ""+rp.j;
 				c.index = iter;
 				iter++;
 				/*if it is empty clause -- success*/
@@ -75,7 +76,7 @@ public class SportShop {
 					/*check resolvable with clauses*/
 					checkResolution(clauses.size()-1);
 				}
-			}				
+//			}				
 		}
 		return null;
 	}
@@ -83,14 +84,17 @@ public class SportShop {
 	 * resolve - resolve 2 resolvable clauses and create a new clause 
 	 * 
 	 */
-	public ArrayList<Clause> resolve(ResPair rp){
+	public Clause resolve(ResPair rp){
+		/*return value*/
 		ArrayList<Clause> ret = new ArrayList<Clause>();
+
 		
-		Clause c1, c2, c;
+		Clause c1, c2, c=null;
 		HashMap<String, Boolean> e1 = new HashMap<String, Boolean>();
 		HashMap<String, Boolean> e2 = new HashMap<String, Boolean>(); 
 		HashMap<String, Boolean> e  = new HashMap<String, Boolean>(); 
 		
+		/*get the clauses in respair*/
 		c1 = rp.ic;
 		c2 = rp.jc;
 		
@@ -98,20 +102,32 @@ public class SportShop {
 		e2.putAll(c2.elements);
 		
 		for(String key : c1.elements.keySet()){
+			/*if there are elements to be resolved*/
 			if(c2.elements.containsKey(key)){
 				c = new Clause();
 				
 				e1.remove(key);
 				e2.remove(key);
 				e.putAll(e1);
-				e.putAll(e2);
+				/*check if there are the same keys*/
+				for(String subkey : e2.keySet()){
+					if(e.containsKey(subkey)){
+						if(e.get(subkey)==e2.get(subkey))
+							e.put(subkey, e2.get(subkey));
+						else
+							e.remove(subkey);
+					}else{
+						e.put(subkey, e2.get(subkey));
+					}
+				}
 				c.elements = e;
 				c.clause   = c.buildClause();
 				
 				ret.add(c);
+				break;
 			}
 		}
-		return ret;
+		return c;
 	}	
 	/*
 	 * check if there are resolvable clauses out of clauses newly added 
@@ -160,6 +176,10 @@ public class SportShop {
 			String curline;
 
 			while((curline = br.readLine()) != null){
+				/*ignore empty lines*/
+				if(curline.trim().length()<1)
+					continue;
+				/*ignore comments*/
 				Pattern p = Pattern.compile("[#]");
 				Matcher m = p.matcher(curline);
 				
@@ -174,7 +194,7 @@ public class SportShop {
 					
 			}
 		}catch(IOException e){
-			System.out.println("Cannot Open the input file. \nput an input file in the same directory of jar file or /src/");
+			System.out.format("Cannot Open the input file(%s). \nput an input file in the same directory of jar file or /src/",filename);
 			return false;
 		}		
 		return true;
@@ -211,10 +231,10 @@ public class SportShop {
 		
 		SportShop ss = new SportShop();
 		
-		if(ss.validateInputs(args))
-			System.out.println("pass");
+		if(!ss.validateInputs(args))
+			return;
 		
-		ss.initialize("example.kb");
+		ss.initialize(args[0]);
 		Clause c = ss.resolution();
 		
 		if(c!= null){
