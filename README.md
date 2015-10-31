@@ -1,14 +1,14 @@
 ### Abstract
 
-This assignment is to implement automated reasoning with a resolution theorem prover that can be used to make inferences from a propositional knowledge base (KB), using proof by negation. Given a set of sentences KB, determine whether a query q, “the middle box must contain white tennis balls” is entailed, KB|=q? 
+>This assignment is to implement automated reasoning with a resolution theorem prover that can be used to make inferences from a propositional knowledge base (KB), using proof by negation. Given a set of sentences KB, determine whether a query q, “the middle box must contain white tennis balls” is entailed, KB|=q? 
 
 ### Description of Sammy’s Sport Shop
 
-3 boxes of ball are delivered. However, the boxes have labeled incorrectly (Box1: white, Box2: yellow, Box3: both). The manufacturer tells that one box of each has been delivered. One ball is drawn from each box and observed like Box1: yellow, Box2: white, Box3: yellow. 
+>3 boxes of ball are delivered. However, the boxes have labeled incorrectly (Box1: white, Box2: yellow, Box3: both). The manufacturer tells that one box of each has been delivered. One ball is drawn from each box and observed like Box1: yellow, Box2: white, Box3: yellow. 
 
 ### Implementation
 
-The program has 3 part: initialization, resolution, and tracking the tree. Main part of the implementation is resolution part.  The program checks if clauses are resolvable. Then add the pairs to ‘candidates’ and iterate over candidates until it gets empty or empty clauses is generated. Once an empty clause is generated, it means that, the query which was negated and added to candidates, is interred. 
+>The program has 3 part: initialization, resolution, and tracking the tree. Main part of the implementation is resolution part.  The program checks if clauses are resolvable. Then add the pairs to ‘candidates’ and iterate over candidates until it gets empty or empty clauses is generated. Once an empty clause is generated, it means that, the query which was negated and added to candidates, is interred. 
 
 
 ### Propositional logics
