@@ -6,7 +6,9 @@ This assignment is to implement automated reasoning with a resolution theorem pr
 
 3 boxes of ball are delivered. However, the boxes have labeled incorrectly (Box1: white, Box2: yellow, Box3: both). The manufacturer tells that one box of each has been delivered. One ball is drawn from each box and observed like Box1: yellow, Box2: white, Box3: yellow. 
 
+### Implementation
 
+The program has 3 part: initialization, resolution, and tracking the tree. Main part of the implementation is resolution part.  The program checks if clauses are resolvable. Then add the pairs to ‘candidates’ and iterate over candidates until it gets empty or empty clauses is generated. Once an empty clause is generated, it means that, the query which was negated and added to candidates, is interred. 
 
 
 ### Propositional logics
@@ -66,9 +68,6 @@ C3Y C3W C3B
 #add negated query
 -C2W
 ```
-### Implementation
-
-The program has 3 part: initialization, resolution, and tracking the tree. Main part of the implementation is resolution part.  The program checks if clauses are resolvable. Then add the pairs to ‘candidates’ and iterate over candidates until it gets empty or empty clauses is generated. Once an empty clause is generated, it means that, the query which was negated and added to candidates, is interred. 
 
 ### Result
 
